@@ -1,0 +1,1533 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxrjd3U5PCNnJLlprfZhI3fCaEEyLRwnQ&callback=initMap"
+        type="text/javascript"></script>
+    <!-- Font Awesome Icon Library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style type="text/css">
+
+    .login {
+        margin-top: 12px;
+        margin-left: 1200px;
+        color: whitesmoke;
+    }
+
+    .col-md-8 {
+        background-color: whitesmoke;
+    }
+
+    .col-md-4 {
+        background-color: rgba(236, 232, 229, 0.61);
+        height: 100%;
+
+
+    }
+
+    ul.child {
+        display: none;
+        widows: 100% !important;
+        margin-top: 15px;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        color: black;
+
+    }
+
+    li {
+        list-style: none;
+    }
+
+    ul.parent>li {
+        float: left;
+        width: 25%;
+        text-align: center;
+        padding-top: 10px;
+        background: aliceblue;
+        color: black;
+        border-right: 1px solid;
+        cursor: pointer;
+
+    }
+
+    a:hover {
+        color: orange;
+    }
+
+    .active {
+        background-color: orange;
+
+    }
+
+    .box {
+        background-color: orange;
+        color: black;
+    }
+
+    #navigation {
+        background-color: black;
+        border: 10px;
+    }
+
+    #p2 {
+        display: none;
+
+    }
+
+    .navbar-default {
+        background: rgb(5, 25, 114);
+        padding: 18px;
+
+    }
+
+    .btn-default {
+        background: orangered;
+        color: whitesmoke;
+        margin-left: 300px;
+        margin-top: 150px;
+        padding: 10pt;
+
+    }
+
+    .btn-default:hover {
+        background: rgb(235, 50, 4);
+        color: white;
+    }
+
+    .glyphicon-th {
+        color: beige;
+    }
+
+    .search {
+        margin-left: 60px;
+    }
+            li {
+        list-style-type: none;
+    }
+
+        .checked {
+            color: orange;
+        }
+
+        .rowclass {
+            height: 135px;
+            box-sizing: border-box;
+        }
+
+        .leftCard {
+            height: 100%;
+        }
+
+        .centerCard {
+            height: 100%;
+        }
+
+        .rightCard {
+            height: 100%;
+        }
+
+        .card:hover button {
+            visibility: visible;
+
+        }
+
+
+
+
+        .rating {
+            padding-inline-start: 0px;
+        }
+
+        .docimage {
+            border-radius: 50%;
+            padding-top: 20px;
+            height: 78pt;
+
+        }
+
+        .btn {
+            padding-top: 8pt;
+            padding-left: 20pt;
+            padding-right: 20pt;
+            padding-bottom: 8pt;
+            height: 30pt;
+            width: 60pt;
+            background: orange;
+            visibility: hidden;
+
+        }
+
+
+        ul {
+            list-style-type: none;
+
+        }
+
+        #map {
+            width: 30%;
+            height: 700px;
+
+        }
+        .book{
+
+            display: none;
+            float:right;
+            height: 1000px;
+        }
+    </style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+
+
+
+
+
+    <script>
+        $(document).ready(function ($) {
+            console.log('Document Ready');
+            searchlist();
+        });
+    </script>
+
+
+<div class="col-md-4 book" id="bookside" >
+        <h2 id ="clinicname"></h2>
+         <h3 id = "clinicaddress"></h3>
+         <h2>__________________________</h2>
+         <h4 id = "clinicname2"></h4>
+         <div class="right_scrollbox">
+
+
+             <div>
+                 <pre>Availability &nbsp; <a href="#" class="unavailable">SUN </a> <a href="#" class="available"> MON </a> <a href="#" class="available"> TUE </a><a href="#" class="available"> WED </a><a href="#" class="available"> THR </a> <a href="#" class="available"> FRI </a><a href="#" class="available"> SAT </a></pre>
+
+             </div>
+             <pre><a href="#"><button id="time">Time</a></button>  | <a href="#"><button id="amen">Amenities</a></button> </pre>
+             <div id="p1">
+                 <p><input type="date" name="date"></p>
+                 <nav id="navigation">
+                     <ul class="parent">
+                         <li><span class="glyphicon glyphicon-cloud"></span>Morning
+                             <ul class="child">
+                                 <pre><a href="#"><li>9:00</li></a></pre><pre><a href="#"><li>9:15</li></a></pre> <pre><a href="#"><li>9:30</li></a></pre>
+                             </ul>
+                         </li>
+
+                         <li><span class="glyphicon glyphicon-certificate"></span>Afternoon
+                             <ul class="child">
+                                 <pre><a href="#"><li>12:00</li></a></pre><pre><a href="#"><li>12:15</li></a></pre><pre><a href="#"><li>12:30</li></a></pre>
+                             </ul>
+                         </li>
+                         <li><span class="glyphicon glyphicon-globe">Evening</span>
+                             <ul class="child">
+                                 <pre><a href="#"><li>5:00</li></a></pre>
+                                 <pre><a href="#"><li>5:15</li></a></pre>
+                                 <pre><a href="#"><li>5:30</li></a></pre>
+                             </ul>
+                         </li>
+                         <li><span class="glyphicon glyphicon-star">Night</span>
+                             <ul class="child">
+                                 <pre><a href="#"><li>8:00</li></a></pre>
+                                 <pre><a href="#"><li>8:15</li></a></pre>
+                                 <pre><a href="#"><li>8:30</li></a></pre>
+                             </ul>
+                         </li>
+                     </ul>
+             </div>
+
+             <div id="p2">
+                 <p>
+                     <ol>
+                         <li>
+                             <pre>Car Parking <br>Bus Parking</li></ol></pre>
+                 </p>
+             </div>
+
+             <button type="button" class=" btn-default">Confirm Booking</button>
+
+
+         </div>
+         </div>
+
+
+
+
+
+     </div>
+
+
+
+</body>
+
+</html>
+<script type="text/javascript">
+
+
+
+
+
+    var info;
+
+
+
+    function searchlist() {
+
+
+
+
+
+        info = [
+            {
+                "docName": "Krishna",
+                "doctorID": 0,
+                "specialization": "Dental",
+                "qualification": "BDS",
+                "rating": 5,
+                "experience": 7,
+                "cost": 500,
+                "gender": "female",
+                "address": [
+                    {
+                        "addressLineOne": "Khetrapal Nursing Home",
+                        "addressLineTwo": "Gn 5, F N g Sector Rajouri Garden",
+                        "city": "New Delhi",
+                        "state": "Delhi",
+                        "gpsCoordinates": {
+                            "gpsLatitude": 28.7041,
+                            "gpsLongitude": 77.1025
+                        }
+                    }
+                ],
+                "slots": {
+                    "slotInterval": 15,
+                    "morning": [
+                        {
+                            "startTime": "08:00",
+                            "endTime": "10:00"
+                        }
+                    ],
+                    "afternoon": [
+                        {
+                            "startTime": "10:00",
+                            "endTime": "15:00"
+                        }
+                    ],
+                    "evening": [
+                        {
+                            "startTime": "15:00",
+                            "endTime": "18:00"
+                        }
+                    ],
+                    "night": [
+                        {
+                            "startTime": "18:00",
+                            "endTime": "22:00"
+                        }
+                    ]
+                }
+            },
+
+            {
+                "docName": "Ashish",
+                "doctorID": 1,
+                "specialization": "Cardiologists‎ ",
+                "qualification": "MD",
+                "rating": 5,
+                "experience": 11,
+                "cost": 1500,
+                "gender": "male",
+                "address": [
+                    {
+                        "addressLineOne": "Khetrapal Nursing Home",
+                        "addressLineTwo": "Gn 5, F N g Sector Rajouri Garden",
+                        "city": "kerela",
+                        "state": "kerela",
+                        "gpsCoordinates": {
+                            "gpsLatitude": 10.8505,
+                            "gpsLongitude": 76.2711
+                        }
+                    }
+                ],
+                "slots": {
+                    "slotInterval": 15,
+                    "morning": [
+                        {
+                            "startTime": "08:00",
+                            "endTime": "10:00"
+                        }
+                    ],
+                    "afternoon": [
+                        {
+                            "startTime": "10:00",
+                            "endTime": "15:00"
+                        }
+                    ],
+                    "evening": [
+                        {
+                            "startTime": "15:00",
+                            "endTime": "18:00"
+                        }
+                    ],
+                    "night": [
+                        {
+                            "startTime": "18:00",
+                            "endTime": "22:00"
+                        }
+                    ]
+                }
+            },
+
+
+
+
+
+            {
+                "docName": "Jitu",
+                "doctorID": 2,
+                "specialization": "Dental",
+                "qualification": "MBBS",
+                "rating": 4,
+                "experience": 2,
+                "cost": 1800,
+                "gender": "male",
+                "address": [
+                    {
+                        "addressLineOne": "Khetrapal Nursing Home",
+                        "addressLineTwo": "Gn 5, F N g Sector Rajouri Garden",
+                        "city": "Mumbai",
+                        "state": "Maharastra",
+                        "gpsCoordinates": {
+                            "gpsLatitude": 19.0760,
+                            "gpsLongitude": 72.8777
+                        }
+                    }
+                ],
+                "slots": {
+                    "slotInterval": 15,
+                    "morning": [
+                        {
+                            "startTime": "08:00",
+                            "endTime": "10:00"
+                        }
+                    ],
+                    "afternoon": [
+                        {
+                            "startTime": "10:00",
+                            "endTime": "15:00"
+                        }
+                    ],
+                    "evening": [
+                        {
+                            "startTime": "15:00",
+                            "endTime": "18:00"
+                        }
+                    ],
+                    "night": [
+                        {
+                            "startTime": "18:00",
+                            "endTime": "22:00"
+                        }
+                    ]
+                }
+            },
+
+            {
+                "docName": "Niharika",
+                "doctorID": 3,
+                "specialization": "Geriatricians‎",
+                "qualification": "BDS",
+                "rating": 3,
+                "experience": 2,
+                "cost": 1500,
+                "gender": "female",
+                "address": [
+                    {
+                        "addressLineOne": "Khetrapal Nursing Home",
+                        "addressLineTwo": "Gn 5, F N g Sector Rajouri Garden",
+                        "city": "New Delhi",
+                        "state": "Delhi",
+                        "gpsCoordinates": {
+                            "gpsLatitude": 28.7,
+                            "gpsLongitude": 77.8
+                        }
+                    }
+                ],
+                "slots": {
+                    "slotInterval": 15,
+                    "morning": [
+                        {
+                            "startTime": "08:00",
+                            "endTime": "10:00"
+                        }
+                    ],
+                    "afternoon": [
+                        {
+                            "startTime": "10:00",
+                            "endTime": "15:00"
+                        }
+                    ],
+                    "evening": [
+                        {
+                            "startTime": "15:00",
+                            "endTime": "18:00"
+                        }
+                    ],
+                    "night": [
+                        {
+                            "startTime": "18:00",
+                            "endTime": "22:00"
+                        }
+                    ]
+                }
+            },
+
+
+            {
+                "docName": "Adtiya",
+                "doctorID": 4,
+                "specialization": "Gastroenterologists‎",
+                "qualification": "MD",
+                "rating": 2,
+                "experience": 8,
+                "cost": 500,
+                "gender": "male",
+                "address": [
+                    {
+                        "addressLineOne": "Khetrapal Nursing Home",
+                        "addressLineTwo": "Gn 5, F N g Sector Rajouri Garden",
+                        "city": "Dehradun",
+                        "state": "UK",
+                        "gpsCoordinates": {
+                            "gpsLatitude": 30.3165,
+                            "gpsLongitude": 78.0322
+                        }
+                    }
+                ],
+                "slots": {
+                    "slotInterval": 15,
+                    "morning": [
+                        {
+                            "startTime": "08:00",
+                            "endTime": "10:00"
+                        }
+                    ],
+                    "afternoon": [
+                        {
+                            "startTime": "10:00",
+                            "endTime": "15:00"
+                        }
+                    ],
+                    "evening": [
+                        {
+                            "startTime": "15:00",
+                            "endTime": "18:00"
+                        }
+                    ],
+                    "night": [
+                        {
+                            "startTime": "18:00",
+                            "endTime": "22:00"
+                        }
+                    ]
+                }
+            },
+
+            {
+                "docName": "shan",
+                "doctorID": 5,
+                "specialization": "Allergologists‎",
+                "qualification": "DO",
+                "rating": 5,
+                "experience": 10,
+                "cost": 1000,
+                "gender": "Female",
+                "address": [
+                    {
+                        "addressLineOne": "Khetrapal Nursing Home",
+                        "addressLineTwo": "Gn 5, F N g Sector Rajouri Garden",
+                        "city": "Jammu and Kashmir",
+                        "state": "J and K",
+                        "gpsCoordinates": {
+                            "gpsLatitude": 34.083656,
+                            "gpsLongitude": 74.797371
+                        }
+                    }
+                ],
+                "slots": {
+                    "slotInterval": 15,
+                    "morning": [
+                        {
+                            "startTime": "08:00",
+                            "endTime": "10:00"
+                        }
+                    ],
+                    "afternoon": [
+                        {
+                            "startTime": "10:00",
+                            "endTime": "15:00"
+                        }
+                    ],
+                    "evening": [
+                        {
+                            "startTime": "15:00",
+                            "endTime": "18:00"
+                        }
+                    ],
+                    "night": [
+                        {
+                            "startTime": "18:00",
+                            "endTime": "22:00"
+                        }
+                    ]
+                }
+            },
+
+            {
+                "docName": "Neha",
+                "doctorID": 6,
+                "specialization": "Dental",
+                "qualification": "BDS",
+                "rating": 4,
+                "experience": 10,
+                "cost": 500,
+                "gender": "female",
+                "address": [
+                    {
+                        "addressLineOne": "Khetrapal Nursing Home",
+                        "addressLineTwo": "Gn 5, F N g Sector Rajouri Garden",
+                        "city": "Tamil Nadu",
+                        "state": "Tamil",
+                        "gpsCoordinates": {
+                            "gpsLatitude": 11.1271,
+                            "gpsLongitude": 78.6569
+                        }
+                    }
+                ],
+                "slots": {
+                    "slotInterval": 15,
+                    "morning": [
+                        {
+                            "startTime": "08:00",
+                            "endTime": "10:00"
+                        }
+                    ],
+                    "afternoon": [
+                        {
+                            "startTime": "10:00",
+                            "endTime": "15:00"
+                        }
+                    ],
+                    "evening": [
+                        {
+                            "startTime": "15:00",
+                            "endTime": "18:00"
+                        }
+                    ],
+                    "night": [
+                        {
+                            "startTime": "18:00",
+                            "endTime": "22:00"
+                        }
+                    ]
+                }
+            },
+
+            {
+                "docName": "Hiamanshu",
+                "doctorID": 7,
+                "specialization": "Diabetologists‎ ",
+                "qualification": "MBBS",
+                "rating": 2,
+                "experience": 9,
+                "cost": 1500,
+                "gender": "male",
+                "address": [
+                    {
+                        "addressLineOne": "Khetrapal Nursing Home",
+                        "addressLineTwo": "Gn 5, F N g Sector Rajouri Garden",
+                        "city": "banglore",
+                        "state": "Delhi",
+                        "gpsCoordinates": {
+                            "gpsLatitude": 12.9716,
+                            "gpsLongitude": 77.5946
+                        }
+                    }
+                ],
+                "slots": {
+                    "slotInterval": 15,
+                    "morning": [
+                        {
+                            "startTime": "08:00",
+                            "endTime": "10:00"
+                        }
+                    ],
+                    "afternoon": [
+                        {
+                            "startTime": "10:00",
+                            "endTime": "15:00"
+                        }
+                    ],
+                    "evening": [
+                        {
+                            "startTime": "15:00",
+                            "endTime": "18:00"
+                        }
+                    ],
+                    "night": [
+                        {
+                            "startTime": "18:00",
+                            "endTime": "22:00"
+                        }
+                    ]
+                }
+            },
+
+            {
+                "docName": "Hemu",
+                "doctorID": 8,
+                "specialization": "Cardiologists‎",
+                "qualification": "MBBS",
+                "rating": 5,
+                "experience": 7,
+                "cost": 500,
+                "gender": "male",
+                "address": [
+                    {
+                        "addressLineOne": "Khetrapal Nursing Home",
+                        "addressLineTwo": "Gn 5, F N g Sector Rajouri Garden",
+                        "city": "Udyog vihar",
+                        "state": "Delhi",
+                        "gpsCoordinates": {
+                            "gpsLatitude": 28.5047,
+                            "gpsLongitude": 77.0848
+                        }
+                    }
+                ],
+                "slots": {
+                    "slotInterval": 15,
+                    "morning": [
+                        {
+                            "startTime": "08:00",
+                            "endTime": "10:00"
+                        }
+                    ],
+                    "afternoon": [
+                        {
+                            "startTime": "10:00",
+                            "endTime": "15:00"
+                        }
+                    ],
+                    "evening": [
+                        {
+                            "startTime": "15:00",
+                            "endTime": "18:00"
+                        }
+                    ],
+                    "night": [
+                        {
+                            "startTime": "18:00",
+                            "endTime": "22:00"
+                        }
+                    ]
+                }
+            },
+
+            {
+                "docName": "Virat",
+                "doctorID": 9,
+                "specialization": "Internists‎",
+                "qualification": "DO",
+                "rating": 5,
+                "experience": 10,
+                "cost": 1500,
+                "gender": "male",
+                "address": [
+                    {
+                        "addressLineOne": "Khetrapal Nursing Home",
+                        "addressLineTwo": "Gn 5, F N g Sector Rajouri Garden",
+                        "city": "Cyber city",
+                        "state": "Delhi",
+                        "gpsCoordinates": {
+                            "gpsLatitude": 28.4950,
+                            "gpsLongitude": 77.0895
+                        }
+                    }
+                ],
+                "slots": {
+                    "slotInterval": 15,
+                    "morning": [
+                        {
+                            "startTime": "08:00",
+                            "endTime": "10:00"
+                        }
+                    ],
+                    "afternoon": [
+                        {
+                            "startTime": "10:00",
+                            "endTime": "15:00"
+                        }
+                    ],
+                    "evening": [
+                        {
+                            "startTime": "15:00",
+                            "endTime": "18:00"
+                        }
+                    ],
+                    "night": [
+                        {
+                            "startTime": "18:00",
+                            "endTime": "22:00"
+                        }
+                    ]
+                }
+            },
+
+            {
+                "docName": "Raunak",
+                "doctorID": 10,
+                "specialization": "Geriatricians‎",
+                "qualification": "BDS",
+                "rating": 5,
+                "experience": 5,
+                "cost": 500,
+                "gender": "male",
+                "address": [
+                    {
+                        "addressLineOne": "Khetrapal Nursing Home",
+                        "addressLineTwo": "Gn 5, F N g Sector Rajouri Garden",
+                        "city": "New Delhi",
+                        "state": "Delhi",
+                        "gpsCoordinates": {
+                            "gpsLatitude": 28.7,
+                            "gpsLongitude": 77.8
+                        }
+                    }
+                ],
+                "slots": {
+                    "slotInterval": 15,
+                    "morning": [
+                        {
+                            "startTime": "08:00",
+                            "endTime": "10:00"
+                        }
+                    ],
+                    "afternoon": [
+                        {
+                            "startTime": "10:00",
+                            "endTime": "15:00"
+                        }
+                    ],
+                    "evening": [
+                        {
+                            "startTime": "15:00",
+                            "endTime": "18:00"
+                        }
+                    ],
+                    "night": [
+                        {
+                            "startTime": "18:00",
+                            "endTime": "22:00"
+                        }
+                    ]
+                }
+            },
+
+            {
+                "docName": "Avi",
+                "doctorID": 11,
+                "specialization": "Internists‎",
+                "qualification": "BMBS",
+                "rating": 2,
+                "experience": 2,
+                "cost": 500,
+                "gender": "male",
+                "address": [
+                    {
+                        "addressLineOne": "Khetrapal Nursing Home",
+                        "addressLineTwo": "Gn 5, F N g Sector Rajouri Garden",
+                        "city": "gurgaon kellton tech",
+                        "state": " haryana",
+                        "gpsCoordinates": {
+                            "gpsLatitude": 28.5088,
+                            "gpsLongitude": 77.0923
+                        }
+                    }
+                ],
+                "slots": {
+                    "slotInterval": 15,
+                    "morning": [
+                        {
+                            "startTime": "08:00",
+                            "endTime": "10:00"
+                        }
+                    ],
+                    "afternoon": [
+                        {
+                            "startTime": "10:00",
+                            "endTime": "15:00"
+                        }
+                    ],
+                    "evening": [
+                        {
+                            "startTime": "15:00",
+                            "endTime": "18:00"
+                        }
+                    ],
+                    "night": [
+                        {
+                            "startTime": "18:00",
+                            "endTime": "22:00"
+                        }
+                    ]
+                }
+            },
+
+            {
+                "docName": "Aashi",
+                "doctorID": 12,
+                "specialization": "Heart",
+                "qualification": "BDS",
+                "rating": 2,
+                "experience": 10,
+                "cost": 500,
+                "gender": "female",
+                "address": [
+                    {
+                        "addressLineOne": "Khetrapal Nursing Home",
+                        "addressLineTwo": "Gn 5, F N g Sector Rajouri Garden",
+                        "city": "noida",
+                        "state": "UP",
+                        "gpsCoordinates": {
+                            "gpsLatitude": 28.5355,
+                            "gpsLongitude": 77.3910
+                        }
+                    }
+                ],
+                "slots": {
+                    "slotInterval": 15,
+                    "morning": [
+                        {
+                            "startTime": "08:00",
+                            "endTime": "10:00"
+                        }
+                    ],
+                    "afternoon": [
+                        {
+                            "startTime": "10:00",
+                            "endTime": "15:00"
+                        }
+                    ],
+                    "evening": [
+                        {
+                            "startTime": "15:00",
+                            "endTime": "18:00"
+                        }
+                    ],
+                    "night": [
+                        {
+                            "startTime": "18:00",
+                            "endTime": "22:00"
+                        }
+                    ]
+                }
+            },
+
+            {
+                "docName": "Sonal",
+                "doctorID": 13,
+                "specialization": "Diabetologists‎ ",
+                "qualification": "MD",
+                "rating": 5,
+                "experience": 7,
+                "cost": 500,
+                "gender": "female",
+                "address": [
+                    {
+                        "addressLineOne": "Khetrapal Nursing Home",
+                        "addressLineTwo": "Gn 5, F N g Sector Rajouri Garden",
+                        "city": "Noida",
+                        "state": "UP",
+                        "gpsCoordinates": {
+                            "gpsLatitude": 28.5108,
+                            "gpsLongitude": 77.4037
+                        }
+                    }
+                ],
+                "slots": {
+                    "slotInterval": 15,
+                    "morning": [
+                        {
+                            "startTime": "08:00",
+                            "endTime": "10:00"
+                        }
+                    ],
+                    "afternoon": [
+                        {
+                            "startTime": "10:00",
+                            "endTime": "15:00"
+                        }
+                    ],
+                    "evening": [
+                        {
+                            "startTime": "15:00",
+                            "endTime": "18:00"
+                        }
+                    ],
+                    "night": [
+                        {
+                            "startTime": "18:00",
+                            "endTime": "22:00"
+                        }
+                    ]
+                }
+            },
+
+            {
+                "docName": "Tejas",
+                "doctorID": 14,
+                "specialization": "Internists‎ ",
+                "qualification": "MBBS",
+                "rating": 2,
+                "experience": 3,
+                "cost": 300,
+                "gender": "male",
+                "address": [
+                    {
+                        "addressLineOne": "Khetrapal Nursing Home",
+                        "addressLineTwo": "Gn 5, F N g Sector Rajouri Garden",
+                        "city": "Ghaziabaad",
+                        "state": "UP",
+                        "gpsCoordinates": {
+                            "gpsLatitude": 28.6692,
+                            "gpsLongitude": 77.4538
+                        }
+                    }
+                ],
+                "slots": {
+                    "slotInterval": 15,
+                    "morning": [
+                        {
+                            "startTime": "08:00",
+                            "endTime": "10:00"
+                        }
+                    ],
+                    "afternoon": [
+                        {
+                            "startTime": "10:00",
+                            "endTime": "15:00"
+                        }
+                    ],
+                    "evening": [
+                        {
+                            "startTime": "15:00",
+                            "endTime": "18:00"
+                        }
+                    ],
+                    "night": [
+                        {
+                            "startTime": "18:00",
+                            "endTime": "22:00"
+                        }
+                    ]
+                }
+            },
+            {
+                "docName": "Abhishek",
+                "doctorID": 15,
+                "specialization": "Immunologists‎",
+                "qualification": "BDS",
+                "rating": 3,
+                "experience": 6,
+                "cost": 500,
+                "gender": "male",
+                "address": [
+                    {
+                        "addressLineOne": "Khetrapal Nursing Home",
+                        "addressLineTwo": "Gn 5, F N g Sector Rajouri Garden",
+                        "city": "Gurgaon",
+                        "state": "haryana",
+                        "gpsCoordinates": {
+                            "gpsLatitude": 28.4669,
+                            "gpsLongitude": 77.0665
+                        }
+                    }
+                ],
+                "slots": {
+                    "slotInterval": 15,
+                    "morning": [
+                        {
+                            "startTime": "08:00",
+                            "endTime": "10:00"
+                        }
+                    ],
+                    "afternoon": [
+                        {
+                            "startTime": "10:00",
+                            "endTime": "15:00"
+                        }
+                    ],
+                    "evening": [
+                        {
+                            "startTime": "15:00",
+                            "endTime": "18:00"
+                        }
+                    ],
+                    "night": [
+                        {
+                            "startTime": "18:00",
+                            "endTime": "22:00"
+                        }
+                    ]
+                }
+            }, {
+                "docName": "Lokesh",
+                "doctorID": 16,
+                "specialization": "Immunologists‎",
+                "qualification": "BDS",
+                "rating": 3,
+                "experience": 6,
+                "cost": 500,
+                "gender": "male",
+                "address": [
+                    {
+                        "addressLineOne": "Khetrapal Nursing Home",
+                        "addressLineTwo": "Gn 5, F N g Sector Rajouri Garden",
+                        "city": "Gurgaon",
+                        "state": "Gurgaon",
+                        "gpsCoordinates": {
+                            "gpsLatitude": 28.4498,
+                            "gpsLongitude": 77.0567
+                        }
+                    }
+                ],
+                "slots": {
+                    "slotInterval": 15,
+                    "morning": [
+                        {
+                            "startTime": "08:00",
+                            "endTime": "10:00"
+                        }
+                    ],
+                    "afternoon": [
+                        {
+                            "startTime": "10:00",
+                            "endTime": "15:00"
+                        }
+                    ],
+                    "evening": [
+                        {
+                            "startTime": "15:00",
+                            "endTime": "18:00"
+                        }
+                    ],
+                    "night": [
+                        {
+                            "startTime": "18:00",
+                            "endTime": "22:00"
+                        }
+                    ]
+                }
+            }, {
+                "docName": "Saurabh",
+                "doctorID": 17,
+                "specialization": "Immunologists‎",
+                "qualification": "BDS",
+                "rating": 3,
+                "experience": 6,
+                "cost": 500,
+                "gender": "male",
+                "address": [
+                    {
+                        "addressLineOne": "Khetrapal Nursing Home",
+                        "addressLineTwo": "Gn 5, F N g Sector Rajouri Garden",
+                        "city": "Gurgaon",
+                        "state": "sector 37",
+                        "gpsCoordinates": {
+                            "gpsLatitude": 28.4379,
+                            "gpsLongitude": 76.9980
+                        }
+                    }
+                ],
+                "slots": {
+                    "slotInterval": 15,
+                    "morning": [
+                        {
+                            "startTime": "08:00",
+                            "endTime": "10:00"
+                        }
+                    ],
+                    "afternoon": [
+                        {
+                            "startTime": "10:00",
+                            "endTime": "15:00"
+                        }
+                    ],
+                    "evening": [
+                        {
+                            "startTime": "15:00",
+                            "endTime": "18:00"
+                        }
+                    ],
+                    "night": [
+                        {
+                            "startTime": "18:00",
+                            "endTime": "22:00"
+                        }
+                    ]
+                }
+            },
+        ]
+
+
+
+
+
+
+
+        // console.log(info[0].doctorID);
+
+        var container = document.createElement("div");
+        container.setAttribute("class", "container-fluid");
+       // container
+
+        var superRow = document.createElement("div");
+        superRow.setAttribute("class", "row");
+
+        var leftRow = document.createElement("div");
+        leftRow.setAttribute("class", "col-md-8")
+        leftRow.setAttribute("id", "lrow")        //list
+
+
+
+
+
+
+
+        var rightRow = document.createElement("div");
+        rightRow.setAttribute("id", "map")
+        rightRow.setAttribute("class", "col-md-4")         //map
+
+        var scroll = document.createElement("div");
+        scroll.setAttribute("class", "scrollbar")
+        scroll.style.height="300px";
+        scroll.setAttribute("style", "height: 1000px; overflow-y: scroll;")
+
+        var list = document.createElement("ul");
+
+
+        //array variables
+        var listelement = [];
+        var buttonid = [];
+
+        // var g=info[0].doctorID;
+
+        for (var el = 0; el < info.length; el++)  // json length
+        {   //var g=info[el].doctorID;
+            // console.log(g);
+            var elementid = "list" + el;
+
+
+            listelement[el] = document.createElement("li");
+            listelement[el].setAttribute("class", "card")
+            listelement[el].setAttribute("id", elementid)
+
+            var rowCard = document.createElement("div");
+            rowCard.setAttribute("class", "row rowclass")
+
+            var leftCard = document.createElement("div");
+            leftCard.setAttribute("class", "col-md-2 leftCard")
+
+
+
+            var img = document.createElement("img");
+            if (info[el].gender == "male") {
+                img.src = "Doctors-Male.jpg";
+            } else {
+                img.src = "Doctors-Female.jpg";
+            }
+
+            img.setAttribute("class", "docimage")
+            leftCard.appendChild(img);
+
+
+            var centerCard = document.createElement("div");
+            centerCard.setAttribute("class", "col-md-5 centerCard")
+            var docDetails = document.createElement("div");
+            docDetails.setAttribute("class", "docDetails");
+            var docName = document.createElement("h5");
+            docName.setAttribute("class", "m-0");
+            var atag = document.createElement("a");
+            var nametext = document.createTextNode(info[el].docName)   //docname
+
+            var degree = document.createElement("p");
+            var degreetext = document.createTextNode("MBBS,MD,FCCP,FIAMS")
+            degree.appendChild(degreetext);
+
+            var ratinglist = document.createElement("ul");
+            ratinglist.setAttribute("class", "rating")
+            var rate = info[el].rating;
+            let li = [];                                   //rating
+            for (let i = 1; i <= 5; i++) {
+
+
+                li[i] = document.createElement("li");
+                if (i <= rate) {
+                    li[i].setAttribute("class", "fa fa-star checked");
+                } else {
+                    li[i].setAttribute("class", "fa fa-star")
+                }
+                ratinglist.appendChild(li[i]);
+
+            }
+
+            var speciality = document.createElement("p");
+            speciality.setAttribute("class", "grey-text font-medium mt-3 mb-0")
+            var specialitytext = document.createTextNode(info[el].specialization)  //speciality
+            speciality.appendChild(specialitytext);
+
+
+
+            atag.appendChild(nametext);
+            docName.appendChild(atag);
+            docDetails.appendChild(docName);
+            docDetails.appendChild(degree);
+            docDetails.appendChild(ratinglist);
+            docDetails.appendChild(speciality);
+            centerCard.appendChild(docDetails);
+
+
+
+
+
+
+
+            var rightCard = document.createElement("div");
+            rightCard.setAttribute("class", "col-md-5 rightCard")
+
+
+
+            var clinicDetails = document.createElement("div");
+            clinicDetails.setAttribute("class", "doc-clinic-details pl-md-4 d-flex justify-content-around flex-column h-100");
+
+            var atag1 = document.createElement("a");
+            atag1.setAttribute("class", "font14 font-medium");
+            var clinitext = document.createTextNode(info[el].address[0].addressLineOne);   //clinic name
+            atag1.appendChild(clinitext);
+
+
+            var distance = document.createElement("p");
+            distance.setAttribute("class", "grey-text font12");
+            var distancetext = document.createTextNode("1.2" + "km");   //distance
+            distance.appendChild(distancetext);
+
+
+
+
+
+            var price = document.createElement("h5");
+            price.setAttribute("class", "m-0");
+            var pricetext = document.createTextNode(info[el].cost)   //Price
+            price.appendChild(pricetext);
+
+            //buttonid[el] = el;
+
+            var button = document.createElement("button");
+            button.type = "button";
+            button.setAttribute("id", el)
+            button.setAttribute("class", "btn ")
+            var buttontext = document.createTextNode("Book");
+            button.appendChild(buttontext);
+            //<button type="button" class="btn book-appointment btn-primary">Book</button>
+
+            clinicDetails.appendChild(atag1);
+            clinicDetails.appendChild(distance);
+            clinicDetails.appendChild(price)
+            clinicDetails.appendChild(button);
+            rightCard.appendChild(clinicDetails)
+
+
+
+            rowCard.appendChild(leftCard)
+            rowCard.appendChild(centerCard);
+            rowCard.appendChild(rightCard);
+            listelement[el].appendChild(rowCard)
+            list.appendChild(listelement[el]);
+
+            scroll.appendChild(list);
+
+        }
+
+        leftRow.appendChild(scroll);
+        superRow.appendChild(leftRow);
+        superRow.appendChild(rightRow);
+        container.appendChild(superRow);
+        document.body.appendChild(container);
+
+        // for(let j=0;j<20;j++){
+        //     let elid ="list"+j;
+        //     document.getElementById(elid).addEventListener("click", function(){
+        //         document.getElementById(j).style.visibility="visible";
+        //     })
+        // }
+
+
+        loadMap();
+
+
+        for(let k =0;k<info.length;k++){
+            document.getElementById(k).addEventListener("click", function(){
+                loadclinic(k);
+
+
+
+            })
+        }
+
+
+
+
+
+$(function()
+{
+ $('ul.parent>li').hover(function(){
+    $(this).find('ul.child').show(400);
+ },function(){
+    $(this).find('ul.child').hide(400);
+ })
+});
+
+$(document).ready(function(){
+    $("#amen").click(function(){
+      $("#p1").hide();
+    });
+    $("#time").click(function(){
+        $("#p1").show();
+      })
+
+
+});
+$(document).ready(function(){
+    $("#time").click(function(){
+        $("#p2").hide();
+      });
+      $("#amen").click(function(){
+        $("#p2").show();
+          });
+});
+
+
+
+
+    }
+
+    function loadclinic(k){
+        var text1=document.createTextNode(info[k].address[0].addressLineOne);
+        var text3=document.createTextNode(info[k].address[0].addressLineOne);
+        var text2 =document.createTextNode(info[k].address[0].addressLineTwo);
+
+        document.getElementById("clinicname").appendChild(text1);
+        document.getElementById("clinicaddress").appendChild(text2);
+        document.getElementById("clinicname2").appendChild(text3);
+        document.getElementById("bookside").style.display="block";
+                document.getElementById("map").style.display="none";
+
+    }
+
+    function loadMap() {
+        var a = [];
+
+        for (let i = 0; i < info.length; i++) {
+
+
+            var b = [];
+            var count = 0;
+            b[count] = (info[i].doctorID).toString();
+            b[++count] = info[i].address[0].gpsCoordinates.gpsLatitude;
+            b[++count] = info[i].address[0].gpsCoordinates.gpsLongitude
+            a.push(b);
+        }
+        console.log(a);
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 10,
+            center: new google.maps.LatLng(28.5088, 77.0923),
+        });
+
+        var infowindow = new google.maps.InfoWindow();
+
+        var marker, i;
+
+        for (i = 0; i < a.length; i++) {
+
+            marker = new google.maps.Marker({
+                position: new google.maps.LatLng(a[i][1], a[i][2]),
+                map: map
+            });
+
+            google.maps.event.addListener(marker, 'click', (function (marker, i) {
+
+
+                return function () {
+
+
+                    //new google.maps.Size(42,68)
+                    //
+                    infowindow.setContent(a[i][0]);
+
+
+                     linker(a[i][0]);
+                    infowindow.open(map, marker);
+
+
+
+                }
+            })(marker, i));
+        }
+    }
+    //var x =0;
+    function linker(id){
+        var id2 = "list"+id;
+        for(let i=0;i<info.length;i++){
+            let id1 ="list"+i;
+
+            if(id1==id2){
+
+                document.getElementById(id1).style.borderStyle = "solid";
+                document.getElementById(id).style.visibility="visible";
+            }else{
+               // console.log("else condition");
+                document.getElementById(id1).style.borderStyle = "none";
+            }
+        }
+//         var first = id;
+// info.sort(function(x,y){ return x.doctorID == first ? -1 : y.doctorID == first ? 1 : 0; });
+
+// console.log(info);
+// location.reload();
+
+
+
+    }
+
+
+</script>

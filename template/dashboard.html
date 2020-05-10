@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #CCFFCC;
+  height: 100vh;
+}
+
+</style>
+<div class="container login-container">
+            <div class="row">
+
+                <div class=" login-form-2">
+                    <h3> Animal Diseases Form </h3>
+                     <form id="disease-form" class="form" action="{% url 'diseaseSubmit' %}" method="post">
+                            {% csrf_token %}
+                        <div class="form-group">
+                                <label for="type" class="text-info">Type:</label><br>
+                                <select name="type" id="type">
+                                    <option value="">Please select</option>
+                                    <option value="Cat">Cat</option>
+                                    <option value="Dog">Dog</option>
+                                    <option value="bird">bird</option>
+                                    <option value="Cow/buffalo">Cow/buffalo</option>
+                                    <option value="Hen">Hen</option>
+                                    <option value="other">other</option>
+                                </select>
+                        </div>
+                    <div class="form-group">
+                                <label for="type" class="text-info">Diseases:</label><br>
+                                <select name="disease" id="disease">
+                                    <option value="">Please select</option>
+                                    <option value="Infection">Infection</option>
+                                    <option value="Fever">Fever</option>
+                                    <option value="Rabies">Rabies</option>
+                                    <option value="Mantal Disease">Mental Disease</option>
+                                    <option value="Fracture">Fracture</option>
+                                    <option value="other">other</option>
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="type" class="text-info">Priority:</label><br>
+                            <input type="radio" id="Urgent" name="priority" value="Urgent">
+                            <label for="Urgent">Urgent</label><br>
+                            <input type="radio" id="Not urgent" name="priority" value="Not urgent">
+                            <label for="Not Urgent">Not Urgent</label><br>
+                            <input type="radio" id="other" name="priority" value="other">
+                            <label for="other">other</label>
+                        </div>
+                        <label for="type" class="text-info">Description about disease:</label><br>
+                        <textarea name="description" rows="10" cols="30"></textarea>
+                        <br><br>
+                        <div class="form-group">
+                            <input type="submit" class="btnSubmit" value="Login" />
+
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+{% endblock %}

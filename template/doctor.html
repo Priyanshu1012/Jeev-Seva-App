@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SevaApp</title>
+</head>
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #CCFFCC;
+  height: 100vh;
+}
+
+</style>
+ <div class=" login-form-1">
+                  <h1>CHOOSE YOUR DOCTOR:</h1>
+                    {% for item in doctor_data %}
+                   <div>
+                    {{ item.name }}<br>
+                    {{ item.contact_no }}<br>
+                    {{ item.address }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                   <button class="sendmsg" onclick="location.href='{% url 'doctorSubmit' item.id %}'">Click</button>
+                       <br>
+                       <br>
+                   </div>
+                    {% endfor %}
+                </div>
+</body>
+</html>
