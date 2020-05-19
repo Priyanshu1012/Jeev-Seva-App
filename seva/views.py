@@ -92,18 +92,49 @@ def diseaseSubmit(request):
 def send(request,id):
     try:
         valid = Register.objects.all().filter(id=id)
+        animal_info = Animaldisease.objects.last()
+        animal_type = animal_info.type
+        animal_disease = animal_info.disease
+        animal_priority = animal_info.priority
+        describe = animal_info.description
     except Exception as e:
         print(e)
+
     for i in valid:
         send_email_data = i.email
 
-    send_mail('Django mail',
-              'hello',
-              'priyanshukhandelwal101@gmail.com',
-              [send_email_data],
-              fail_silently=False)
+    senders_address = "priyanshukhandelwal101@gmail.com"
+    receivers_address = send_email_data
+    SUBJECT = "JEEV SEVA: DISEASE DETAILS"
 
-    return HttpResponse('mail sent')
+    text = 'Animal Type      = ' + animal_type + '\n' + 'Animal Disease    = ' + animal_disease + '\n' + \
+           'Availability Status = ' + animal_priority + '\n' + 'Description        = ' + describe
+    message = 'Subject: {}\n\n{}'.format(SUBJECT, text)
+    mail = smtplib.SMTP("smtp.gmail.com", 587)
+    mail.ehlo()
+    mail.starttls()
+
+    mail.login(senders_address, "#########")
+    mail.sendmail(senders_address, receivers_address, message)
+    print("Successfully sent email to {receivers_address}")
+    mail.close()
+
+    return HttpResponse("<h1>MAIL SENT</h1>")
+
+    # try:
+    #     valid = Register.objects.all().filter(id=id)
+    # except Exception as e:
+    #     print(e)
+    # for i in valid:
+    #     send_email_data = i.email
+    #
+    # send_mail('Django mail',
+    #           'hello',
+    #           'priyanshukhandelwal101@gmail.com',
+    #           [send_email_data],
+    #           fail_silently=False)
+    #
+    # return HttpResponse('mail sent')
 
 
 
