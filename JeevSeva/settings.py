@@ -127,11 +127,3 @@ STATICFILES_URL = (
 )
 
 STATIC_URL = '/static/'
-
-#
-# EMAIl_HOST = 'smtp.gmail.com'
-# EMAIL_PORT = 587
-# EMAIl_HOST_USER = 'priyanshukhandelwal101@gmail.com'
-# EMAIL_HOST_PASSWORD = 'Khandelwal@123'
-# EMAIL_USE_TLS = True
-# EMAIL_USE_SSL = False
