@@ -14,6 +14,7 @@ class Animaldisease(models.Model):
     type = models.CharField(max_length=50)
     disease = models.CharField(max_length=50)
     priority = models.CharField(max_length=50)
+    image = models.ImageField(upload_to='')
     description = models.CharField(max_length=200)
 
 

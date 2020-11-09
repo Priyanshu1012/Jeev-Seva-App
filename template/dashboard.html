@@ -1,36 +1,29 @@
-{% extends 'base.html' %}
-{% block content %}
 {% load static %}
-<style>
-body {
-  margin: 0;
-  padding: 0;
-  background-color: #CCFFCC;
-  height: 100vh;
-}
-
-</style>
-<div class="container login-container">
-            <div class="row">
-
-                <div class=" login-form-2">
-                    <h3> Animal Diseases Form </h3>
-                     <form id="disease-form" class="form" action="{% url 'diseaseSubmit' %}" method="post">
-                            {% csrf_token %}
-                        <div class="form-group">
-                                <label for="type" class="text-info">Type:</label><br>
-                                <select name="type" id="type">
-                                    <option value="">Please select</option>
-                                    <option value="Cat">Cat</option>
-                                    <option value="Dog">Dog</option>
-                                    <option value="bird">bird</option>
-                                    <option value="Cow/buffalo">Cow/buffalo</option>
-                                    <option value="Hen">Hen</option>
-                                    <option value="other">other</option>
-                                </select>
-                        </div>
-                    <div class="form-group">
-                                <label for="type" class="text-info">Diseases:</label><br>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Animal disease form</title>
+<link rel="stylesheet" type="text/css" href="{% static 'css/dashboard.css' %}">
+</head>
+<body style="background-color:#887e7e;">
+    
+<div class="form-style-5">
+    <form id="disease-form" class="form" action="{% url 'diseaseSubmit' %}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+    <fieldset>
+    <legend><span class="number">1</span> Animal Disease Info</legend>
+    <label for="type" class="text-info">Type:</label><br>
+                                <select id="type" name="type">
+                                  <option value="">Please select</option>
+                                  <option value="Cat">Cat</option>
+                                  <option value="Dog">Dog</option>
+                                  <option value="bird">Bird</option>
+                                  <option value="Cow/buffalo">Cow/buffalo</option>
+                                  <option value="Hen">Hen</option>
+                                  <option value="other">Other</option>
+                                </select> 
+    
+    <label for="type" class="text-info">Diseases:</label><br>
                                 <select name="disease" id="disease">
                                     <option value="">Please select</option>
                                     <option value="Infection">Infection</option>
@@ -40,26 +33,27 @@ body {
                                     <option value="Fracture">Fracture</option>
                                     <option value="other">other</option>
                                 </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="type" class="text-info">Priority:</label><br>
-                            <input type="radio" id="Urgent" name="priority" value="Urgent">
-                            <label for="Urgent">Urgent</label><br>
-                            <input type="radio" id="Not urgent" name="priority" value="Not urgent">
-                            <label for="Not Urgent">Not Urgent</label><br>
-                            <input type="radio" id="other" name="priority" value="other">
-                            <label for="other">other</label>
-                        </div>
-                        <label for="type" class="text-info">Description about disease:</label><br>
-                        <textarea name="description" rows="10" cols="30"></textarea>
-                        <br><br>
-                        <div class="form-group">
-                            <input type="submit" class="btnSubmit" value="Login" />
 
-                        </div>
+    <label for="type" class="text-info">Priority:</label><br>
+                                <input type="radio" id="Urgent" name="priority" value="Urgent">
+                                <label for="Urgent">Urgent</label><br>
+                                <input type="radio" id="Not urgent" name="priority" value="Not urgent">
+                                <label for="Not Urgent">Not Urgent</label><br>
+                                <input type="radio" id="other" name="priority" value="other">
+                                <label for="other">Other</label>
+    <label for="type" class="text-info">Choose a profile picture:</label>
 
-                    </form>
-                </div>
-            </div>
-        </div>
-{% endblock %}
+    <input type="file"
+            style="height: 50px;"
+            id="image" name="image"
+            accept="image/png, image/jpeg">
+    </field set>
+    <fieldset>
+    <legend><span class="number">2</span> Additional Info</legend>
+    <textarea name="description" rows="10" cols="20" placeholder="Description..."></textarea>
+    </fieldset>
+    <input type="submit" value="Apply" />
+    </form>
+    </div>
+</body>
+    </html>

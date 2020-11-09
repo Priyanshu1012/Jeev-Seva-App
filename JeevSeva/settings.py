@@ -25,7 +25,11 @@ SECRET_KEY = 'fmrcunmf&u1&h5-z-yl(orx15^&0zdi*x32g@o97)jmd84slu4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ca8684e5e94b.ngrok.io']
+
+# STATICFILES_DIRS = [
+#     "E:/Django app/Jeev-Seva-App/static",
+# ]
 
 
 # Application definition
@@ -38,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'maps',
 ]
 
 MIDDLEWARE = [
@@ -122,8 +127,15 @@ PROJECT_ROOT= os.path.join(os.path.dirname(__file__),'..')
 SITE_ROOT = PROJECT_ROOT
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'  
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
 STATICFILES_URL = (
     os.path.join(BASE_DIR,'staticfiles'),
 )
 
-STATIC_URL = '/static/'
