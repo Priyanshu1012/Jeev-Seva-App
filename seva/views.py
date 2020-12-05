@@ -135,7 +135,7 @@ def send(request,id):
     s.ehlo()
     s.starttls()
     s.ehlo()
-    s.login('priyanshukhandelwal101@gmail.com', 'Khandelwal@123')
+    s.login('priyanshukhandelwal101@gmail.com', '#########')
     s.sendmail(msg['From'], msg['To'], msg.as_string())
     s.quit()
 
